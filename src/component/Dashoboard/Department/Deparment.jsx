@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import  "./Department.css" 
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import Select from 'react-select';
 const ManageDepartment = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [companyNames, setCompanyNames] = useState([]);
@@ -26,7 +26,6 @@ const ManageDepartment = () => {
     // Add more department data as needed
   ];
   useEffect(() => {
-    // Fetch company names from the API and set them in the state
     fetchCompanyNamesFromAPI()
       .then((data) => {
         setCompanyNames(data);
@@ -126,20 +125,14 @@ const ManageDepartment = () => {
                   <h2 className="text-uppercase text-center mb-5">Add  Your department</h2>
                   <div className="mb-2">
         <label htmlFor="companyName">Company Name</label>
-        <select
+        <Select
           id="companyName"
           name="companyName"
-          className="form-control form-control-lg"
-          value={selectedCompany}
-          onChange={(e) => setSelectedCompany(e.target.value)}
-        >
-          <option value="">Select a company</option>
-          {companyNames.map((name, index) => (
-            <option key={index} value={name}>
-              {name}
-            </option>
-          ))}
-        </select>
+          options={companyNames.map((name) => ({ value: name, label: name }))}
+          value={{ value: selectedCompany, label: selectedCompany }}
+          onChange={(selectedOption) => setSelectedCompany(selectedOption.value)}
+          isSearchable
+        />
       </div>
                   <div className="mb-2">
                     <label htmlFor="departmentName">Department Name</label>

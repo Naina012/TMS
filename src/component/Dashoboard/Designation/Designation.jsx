@@ -1,13 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import './Designation.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import Select from 'react-select';
 const ManageDesignation = () => {
+  const SelectField = ({ label, id, name, value, options, onChange, isSearchable }) => (
+    <div className="mb-2">
+      <label htmlFor={id}>{label}</label>
+      <Select
+        id={id}
+        name={name}
+        options={options.map((option) => ({ value: option, label: option }))}
+        value={{ value, label: value }}
+        onChange={(selectedOption) => onChange(selectedOption.value)}
+        isSearchable={isSearchable}
+      />
+    </div>
+  );
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [companyNames, setCompanyNames] = useState([]);
   const [departmentNames, setDepartmentNames] = useState([]);
   const [selectedCompany, setSelectedCompany] = useState('');
   const [selectedDepartment, setSelectedDepartment] = useState('');
+  const [designationName, setDesignationName] = useState('');
+
   const Designations = [
     { id: 1, companyname: 'Company A',departmentname: 'Company A',designationname: 'Designation A' },
   ]
@@ -110,49 +125,40 @@ const ManageDesignation = () => {
                     <i className="fa fa-times" style={{ color: 'red' }}></i>
                   </button>
 
-                  <h2 className="text-uppercase text-center mb-5">Add  Your Designation</h2>
-                  <div className="mb-2">
-        <label htmlFor="companyName">Company Name</label>
-        
-        <select
-          id="companyName"
-          name="companyName"
-          className="form-control form-control-lg"
-          value={selectedCompany}
-          onChange={(e) => setSelectedCompany(e.target.value)}
-        >
-          <option value="">Select a company</option>
-          {companyNames.map((name, index) => (
-            <option key={index} value={name}>
-              {name}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className="mb-2">
-  <label htmlFor="departmentName">Department Name</label>
-  <select
-  
-    id="departmentName"
-    name="departmentName"
-    className="form-control form-control-lg"
-    value={selectedDepartment}
-    onChange={(e) => setSelectedDepartment(e.target.value)}
-  >
-    <option value="">Select a department</option>
-    {departmentNames.map((name, index) => (
-      <option key={index} value={name}>
-        {name}
-      </option>
-    ))}
-  </select>
-  
-</div>
+                  <h2 className="text-uppercase text-center mb-5">Add Your Designation</h2>
+
+                  <SelectField
+                    label="Company Name"
+                    id="companyName"
+                    name="companyName"
+                    value={selectedCompany}
+                    options={companyNames}
+                    onChange={setSelectedCompany}
+                    isSearchable
+                  />
+
+                  <SelectField
+                    label="Department Name"
+                    id="departmentName"
+                    name="departmentName"
+                    value={selectedDepartment}
+                    options={departmentNames}
+                    onChange={setSelectedDepartment}
+                    isSearchable
+                  />
+
                   <div className="mb-2">
                     <label htmlFor="DesignationName">Designation Name</label>
-                    <input type="text" id="DesignationName" name="DesignationName" className="form-control form-control-lg" />
+                    <input
+                      type="text"
+                      id="DesignationName"
+                      name="DesignationName"
+                      className="form-control form-control-lg"
+                      value={designationName}
+                      onChange={(e) => setDesignationName(e.target.value)}
+                    />
                   </div>
-                  
+
                   <div className="d-flex flex-row justify-content-center mb-4">
                     <div className="form-check">
                       <input

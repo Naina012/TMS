@@ -8,12 +8,12 @@ export const usefulLink = [
     {name: 'Pricing', id: 4},
     {name: 'Enterprises', id: 5}
 ]
-export const ourServices = [
-    {name: 'Strategy & Research', id: 6},
-    {name: 'Web Design', id: 7},
-    {name: 'Web Development', id: 8},
-    {name: 'Digital Marketing', id: 9},
-    {name: 'Graphic Design', id: 10}
+export const ourFeatures = [
+    {name: 'Efficiency', id: 6},
+    {name: 'Organization', id: 7},
+    {name: 'Collaboration', id: 8},
+    {name: 'Automation', id: 9},
+    {name: 'Prioritization', id: 10}
 ]
 export const otherLinks = [
     {name: 'FAQ', id: 11},

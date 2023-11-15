@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook, faInstagram, faLinkedinIn, faTwitter } from '@fortawesome/free-brands-svg-icons'
 import FooterCol from './FooterCol';
 import './Footer.css';
-import { usefulLink, ourServices, otherLinks, footerInfo } from '../../FooterData';
+import { usefulLink, ourFeatures, otherLinks, footerInfo } from '../../FooterData';
 import FooterInfo from './FooterInfo';
 import { Link } from 'react-router-dom';
 import { scrollUP } from '../../Shared/ScrollTop/ScrollTop';
@@ -47,10 +47,10 @@ const Footer = () => {
                     </ul>
                 </Col>
                 <FooterCol key="2" menuItems={usefulLink} title="USEFUL LINK"/>
-                <FooterCol key="3" menuItems={ourServices} title="OUR SERVICES"/>
+                <FooterCol key="3" menuItems={ourFeatures} title="OUR FEATURES"/>
                 <FooterCol key="4" menuItems={otherLinks} title="OTHER LINKS"/>
             </Row>
-            <p className="copyRight">Copyright &copy; 2023 <span className="fHighlight">Naina Kaushik</span>. All rights reserved.</p>
+            <p className="copyRight">Copyright &copy; 2023 <span className="fHighlight">SKILL2SKILLS</span>. All rights reserved.</p>
         </section>
     );
 };

@@ -83,20 +83,21 @@ const Sidebar = ({ setTitle }) => {
 
               <MDBListGroup flush className="mx-3">
                 <MDBRipple rippleTag='span'>
-                  <MDBListGroupItem tag='a' href='#' action className='border-0 border-bottom rounded' onClick={() => setCollapse2(!collapse2)}>
+                  <MDBListGroupItem tag='a' href='/dashboard/createTask' action className='border-0 border-bottom rounded'  onClick={() => setTitle('Create Task')}
+                    to="/dashboard/createTask">
                     <MDBIcon fas icon="chart-area me-3" />
-                    Collapsed menu
+                    Create Task
                   </MDBListGroupItem>
                 </MDBRipple>
 
-                <MDBCollapse show={collapse2}>
+                {/* <MDBCollapse show={collapse2}>
                   <MDBListGroup flush>
                     <MDBListGroupItem className="py-1" tag='a' action href='#'>Link</MDBListGroupItem>
                     <MDBListGroupItem className= "py-1" tag='a' action href='#'>Link</MDBListGroupItem>
                     <MDBListGroupItem className="py-1" tag='a' action href='#'>Link</MDBListGroupItem>
                     <MDBListGroupItem className="py-1" tag='a' action href='#'>Link</MDBListGroupItem>
                   </MDBListGroup>
-                </MDBCollapse>
+                </MDBCollapse> */}
               </MDBListGroup>
             </div>
           </MDBCollapse>

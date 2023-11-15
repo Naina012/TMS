@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Employees.css';
+import './Task.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Table from 'react-bootstrap/Table';
 import Select from 'react-select';
@@ -10,7 +10,7 @@ import {
   MDBCheckbox,
   MDBBtn
 } from 'mdb-react-ui-kit';
-const ManageEmployee = () => {
+const CreateTask = () => {
   const SelectField = ({ label, id, name, value, options, onChange, isSearchable }) => (
     <div className="mb-2">
       <label htmlFor={id}>{label}</label>
@@ -26,38 +26,27 @@ const ManageEmployee = () => {
   );
   
 
-
-  const [searchResults, setSearchResults] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  
-
-  const handleSearch = async (inputValue, setResults) => {
-    const response = await fetch(`your-search-api-endpoint-here?q=${inputValue}`);
-    const data = await response.json();
-    setResults(data);
-  };
-
-  const handleInputChange = (e, setFunction) => {
-    const inputValue = e.target.value;
-    setFunction(inputValue);
-    handleSearch(inputValue, setSearchResults);
-  };
-
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [companyNames, setCompanyNames] = useState([]);
   const [departmentNames, setDepartmentNames] = useState([]);
   const [designationNames, setDesignationNames] = useState([]);
+  const [employeeNames, setEmployeeNames] = useState([]);
+  const [employeeEmail, setEmployeeEmail] = useState([]);
   const [selectedCompany, setSelectedCompany] = useState('');
   const [selectedDepartment, setSelectedDepartment] = useState('');
   const [selectedDesignation, setSelectedDesignation] = useState('');
+  const [selectedEmployee, setSelectedEmployee] = useState('');
+  const [selectedEmail, setSelectedEmail] = useState('');
   const Employees = [
-    { id: 1, companyname: 'Company A',departmentname: 'Department A',designationname: 'Designation A',employeename: 'Employee A' ,dateofbirth: '12-05-2001', email:"123@gmail.com", addharno: "1234567890", phoneno:"7901968155"},
+    { id: 1, companyname: 'Company A',departmentname: 'Department A',designationname: 'Designation A',employeename: 'Employee A' , email:"123@gmail.com",  taskallocated:"Task1"},
   ]
   useEffect(() => {
     // Fetch company names and department names from the API
     fetchDropdownData('your-company-api-endpoint-here', setCompanyNames);
     fetchDropdownData('your-department-api-endpoint-here', setDepartmentNames);
     fetchDropdownData('your-designation-api-endpoint-here', setDesignationNames);
+    fetchDropdownData('your-employee-api-endpoint-here', setEmployeeNames);
+    fetchDropdownData('your-employee-mail-api-endpoint-here', setEmployeeEmail);
   }, []);
 
   const openPopup = () => {
@@ -78,10 +67,10 @@ const ManageEmployee = () => {
     <div className="DashboardContainer">
       <div className="Data">
         <div className="Admin">
-          <b>Employees</b>
+          <b>Tasks</b>
         </div>
         <div className="search">
-        <span className="plus-icon search" onClick={openPopup} title="Add your Depatment">
+        <span className="plus-icon search" onClick={openPopup} title="Create your task">
 
             <i className="fa fa-plus"></i>
           </span>
@@ -98,10 +87,10 @@ const ManageEmployee = () => {
                 <th>Department Name</th>
                 <th>Designation Name</th>
                 <th>Employee Name</th>
-                <th>Date Of Birth</th>
+                {/* <th>Date Of Birth</th> */}
                 <th>Email</th>
-                <th>Adhaar No.</th>
-                <th>Phone No.</th>
+                <th>Task Allocated</th>
+                
                 <th>Actions</th>
               </tr>
             </thead>
@@ -113,10 +102,10 @@ const ManageEmployee = () => {
                   <td>{Employee.departmentname}</td>
                   <td>{Employee.designationname}</td>
                   <td>{Employee.employeename}</td>
-                  <td>{Employee.dateofbirth}</td>
+                  {/* <td>{Employee.dateofbirth}</td> */}
                   <td>{Employee.email}</td>
-                  <td>{Employee.addharno}</td>
-                  <td>{Employee.phoneno}</td>
+                  <td>{Employee.taskallocated}</td>
+               
 
                   {/* <td>{Employee.pan}</td> */}
                   <td>
@@ -162,10 +151,12 @@ const ManageEmployee = () => {
                     <i className="fa fa-times" style={{ color: 'red' }}></i>
                   </button>
 
-                  <h2 className="text-uppercase text-center mb-5">Add  Your Employee</h2>
-                  
-         
-          <SelectField
+                  <h2 className="text-uppercase text-center mb-5">Create task</h2>
+                  <MDBRow className='mb-4'>
+                  <MDBCol>
+        
+
+        <SelectField
                     label="Company Name"
                     id="companyName"
                     name="companyName"
@@ -175,8 +166,10 @@ const ManageEmployee = () => {
                     isSearchable
                   />
         
-        <MDBRow>
-        <MDBCol>
+      </MDBCol>
+      <MDBCol>
+      {/* <div className="mb-2"> */}
+       
         <SelectField
                     label="Department Name"
                     id="departmentName"
@@ -186,8 +179,9 @@ const ManageEmployee = () => {
                     onChange={setSelectedDepartment}
                     isSearchable
                   />
-      </MDBCol>
-      <MDBCol>
+        </MDBCol>
+        </MDBRow>
+      <div className="mb-2">
       <SelectField
                     label="Designation Name"
                     id="designationNames"
@@ -197,45 +191,55 @@ const ManageEmployee = () => {
                     onChange={setDesignationNames}
                     isSearchable
                   />
-
-      </MDBCol>
-
-      
-      </MDBRow>
+      </div>
                   {/* <div className="mb-2"> */}
                   <MDBRow>
                   <MDBCol>
-                    <label htmlFor="EmployeeName">Employee Name</label>
-                    <input type="text" id="EmployeeName" name="EmployeeName" className="form-control form-control-lg" />
+                    {/* <label htmlFor="EmployeeName">Employee Name</label>
+                    <input type="text" id="EmployeeName" name="EmployeeName" className="form-control form-control-lg" /> */}
+                     <div className="mb-2">
+        
+        <SelectField
+                    label="Employee Name"
+                    id="employeeNames"
+                    name="employeeNames"
+                    value={selectedEmployee}
+                    options={employeeNames}
+                    onChange={setEmployeeNames}
+                    isSearchable
+                  />
+      </div>
                     </MDBCol>
                     <MDBCol>
-          <label htmlFor="DateOfBirth">Date Of Birth</label>
-          <input type="text" id="DateOfBirth" name="DateOfBirth" className="form-control form-control-lg" />
+                    <SelectField
+                    label="Employee Mail"
+                    id="employeemail"
+                    name="employeeMail"
+                    value={selectedEmail}
+                    options={employeeEmail}
+                    onChange={setEmployeeEmail}
+                    isSearchable
+                  />
           </MDBCol>
           </MDBRow>
 
       
         {/* Input for Email */}
 
-        <div className="mb-2">
+        {/* <div className="mb-2">
           <label htmlFor="Email">Email</label>
           <input type="text" id="Email" name="Email" className="form-control form-control-lg" />
-        </div>
+        </div> */}
       
         {/* Input for Adhaar No. */}
         <MDBRow>
-        <MDBCol>
-          <label htmlFor="AdhaarNo">Adhaar No.</label>
-          <input type="text" id="AdhaarNo" name="AdhaarNo" className="form-control form-control-lg" />
         
-        </MDBCol>
-     
-        {/* Input for Phone No. */}
-        <MDBCol>
-          <label htmlFor="PhoneNo">Phone No.</label>
-          <input type="text" id="PhoneNo" name="PhoneNo" className="form-control form-control-lg" />
+          <label htmlFor="TaskDes">Task Description</label>
+          <input type="text" id="TaskDes" name="TaskDes" className="form-control form-control-lg"  />
+        
        
-        </MDBCol>
+     
+        
         </MDBRow>
                   
                   <div className="d-flex flex-row justify-content-center mb-4">
@@ -264,7 +268,7 @@ const ManageEmployee = () => {
   );
 };
 
-export default ManageEmployee;
+export default CreateTask;
 function fetchDropdownData(apiEndpoint, setData) {
   fetch(apiEndpoint)
     .then((response) => response.json())
