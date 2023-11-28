@@ -32,7 +32,7 @@ const ManageCompany = () => {
           <b>Company</b>
         </div>
         <div className="search">
-        <span className="plus-icon search" onClick={openPopup} title="Add your company">
+        <span className="plus-icon search" title="Add your company">
 
             <i className="fa fa-plus"></i>
           </span>
